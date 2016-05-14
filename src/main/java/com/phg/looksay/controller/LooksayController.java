@@ -22,7 +22,14 @@ public class LooksayController {
 
     @RequestMapping(value="/looksay/{startnum}/{rows}", method= RequestMethod.GET)
     public ArrayList<String> generateRows(@PathVariable int startnum, @PathVariable int rows) {
-        return looksayService.generateLines(startnum, rows);
+        if(rows<31) {
+            return looksayService.generateLines(startnum, rows);
+        }
+        else {
+                ArrayList<String> result = new ArrayList<String>();
+                result.add("Please try and keep it to 30 or less on the rows.  This is a free Heroku dyno, after all!");
+                return result;
+            }
     }
 
 }
