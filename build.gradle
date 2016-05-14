@@ -50,6 +50,17 @@ task integration(type: Test) {
 	classpath = sourceSets.integration.runtimeClasspath
 }
 
+task stage {
+	dependsOn build
+}
+
+task copyToLib(type: Copy) {
+	into "$buildDir/lib"
+	from(configurations.compile)
+}
+
+stage.dependsOn(copyToLib)
+
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-actuator')
 	compile('org.springframework.boot:spring-boot-starter-web')
