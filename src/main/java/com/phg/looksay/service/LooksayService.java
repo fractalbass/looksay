@@ -1,5 +1,7 @@
 package com.phg.looksay.service;
 
+import com.phg.looksay.dao.MessageDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -9,6 +11,9 @@ import java.util.ArrayList;
  */
 @Component
 public class LooksayService {
+
+    @Autowired
+    MessageDao messageDao;
 
     public ArrayList<String> generateLines(int startNum, int rows) {
         ArrayList<String> output = new ArrayList<String>();
@@ -38,8 +43,12 @@ public class LooksayService {
         return output;
     }
 
-    public String getMessage() {
-        return "|Miles Sure Is Cool.|";
+    public String getMessage(int device, int channel) {
+        String msg = messageDao.get(device, channel);
+        return "|" + msg + "|";
+    }
 
+    public boolean saveMessage(int device, int channel, String theMessage) {
+        return messageDao.save(device, channel, theMessage);
     }
 }

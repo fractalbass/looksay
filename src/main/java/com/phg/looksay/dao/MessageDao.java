@@ -1,11 +1,14 @@
 package com.phg.looksay.dao;
 
+import org.springframework.stereotype.Component;
+
 import java.net.URISyntaxException;
 import java.sql.*;
 
 /**
  * Created by milesporter on 2/20/17.
  */
+@Component
 public class MessageDao {
 
     private static Connection getConnection() throws URISyntaxException, SQLException {

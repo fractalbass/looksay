@@ -5,10 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
@@ -33,8 +30,18 @@ public class LooksayController {
             }
     }
 
-    @RequestMapping(value="/message", method= RequestMethod.GET)
-    public String getMessage() {
-        return looksayService.getMessage();
+    @RequestMapping(value="/message/{device}/{channel}", method= RequestMethod.GET)
+    public String getMessage(@PathVariable int device, @PathVariable int channel) {
+        return looksayService.getMessage(device, channel);
+    }
+
+    @RequestMapping(value="/message/{device}/{channel}", method= RequestMethod.POST)
+    public String getMessage(@PathVariable int device, @PathVariable int channel, @RequestBody String message) {
+        boolean result = looksayService.saveMessage(device, channel, message);
+        if(result) {
+            return "OK";
+        } else{
+            return "FAILED";
+        }
     }
 }
