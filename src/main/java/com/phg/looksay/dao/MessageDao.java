@@ -11,9 +11,14 @@ import java.sql.*;
 @Component
 public class MessageDao {
 
+    private static Connection conn = null;
+
     private static Connection getConnection() throws URISyntaxException, SQLException {
-        String dbUrl = System.getenv("JDBC_DATABASE_URL");
-        return DriverManager.getConnection(dbUrl);
+        if (conn==null) {
+            String dbUrl = System.getenv("JDBC_DATABASE_URL");
+            conn = DriverManager.getConnection(dbUrl);
+        }
+        return conn;
     }
 
     public boolean save(int device, int channel, String theMessage) {
