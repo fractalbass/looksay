@@ -13,25 +13,29 @@ public class MessageDao {
         return DriverManager.getConnection(dbUrl);
     }
 
-    public int save(int id, String theMessage) {
+    public boolean save(int device, int channel, String theMessage) {
+        boolean result = false;
         try {
             Connection conn = getConnection();
-            PreparedStatement ps = conn.prepareStatement("insert into message (id, message) values (?,?)");
-            ps.setInt(1, id);
-            ps.setString(2, theMessage);
+            PreparedStatement ps = conn.prepareStatement("insert into message (device, channel, message) values (?,?,?)");
+            ps.setInt(1, device);
+            ps.setInt(2, channel);
+            ps.setString(3, theMessage);
             ps.execute();
+            result=true;
         } catch (Exception exp) {
             System.out.println("Error: " + exp.toString());
         }
-        return id;
+        return result;
     }
 
-    public String get(int id) {
+    public String get(int device, int channel) {
         String theMessage = null;
         try {
             Connection conn = getConnection();
-            PreparedStatement ps = conn.prepareStatement("Select message from message where id=?");
-            ps.setInt(1,id);
+            PreparedStatement ps = conn.prepareStatement("Select message from message where device=? and channel=?");
+            ps.setInt(1,device);
+            ps.setInt(2,channel);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 theMessage = rs.getString(1);
@@ -42,12 +46,12 @@ public class MessageDao {
         return theMessage;
     }
 
-    public void delete(int id) {
-        String theMessage = null;
+    public void delete(int device, int channel) {
         try {
             Connection conn = getConnection();
-            PreparedStatement ps = conn.prepareStatement("Delete from message where id=?");
-            ps.setInt(1,id);
+            PreparedStatement ps = conn.prepareStatement("Delete from message where device=? and channel=?");
+            ps.setInt(1,device);
+            ps.setInt(2,channel);
             ps.execute();
         } catch (Exception exp) {
             System.out.println("oops." + exp.toString());

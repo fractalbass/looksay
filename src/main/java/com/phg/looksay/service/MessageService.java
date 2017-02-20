@@ -13,12 +13,12 @@ public class MessageService {
     @Autowired
     MessageDao mDao;
 
-    String getMessage(int id) {
-        return mDao.get(id);
+    String getMessage(int device, int channel) {
+        return mDao.get(device, channel);
     }
 
-    int saveMessage(int id, String message) {
-        return mDao.save(id, message);
+    boolean saveMessage(int device, int channel, String message) {
+        return mDao.save(device, channel, message);
     }
 
 }

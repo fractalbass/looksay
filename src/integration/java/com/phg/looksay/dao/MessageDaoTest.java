@@ -19,7 +19,7 @@ public class MessageDaoTest {
     @Before
     public void cleanup() {
         MessageDao m = new MessageDao();
-        m.delete(1);
+        m.delete(999,1);
     }
 
     @Test
@@ -30,18 +30,23 @@ public class MessageDaoTest {
     @Test
     public void testSaveRecord() {
         MessageDao m = new MessageDao();
-        int x = m.save(1, "This is a test");
-        assert(x>0);
+        int device = 999;
+        int channel = 1;
+        String message = "This is a test.";
+        boolean x = m.save(device, channel, message);
+        assert(x);
     }
 
     @Test
     public void testGetRecord() {
-        int id = 1;
+        int device = 999;
+        int channel = 1;
+        String message = "This is a test.";
         MessageDao m = new MessageDao();
-        int x = m.save(1, "This is a test");
-        assert(x>0);
-        String message = m.get(id);
-        assert(message!=null);
+        boolean result = m.save(device, channel, message);
+        assert(result);
+        String foundMessage = m.get(device, channel);
+        assert(foundMessage.equals("This is a test."));
     }
 
 }
