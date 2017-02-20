@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @ComponentScan(basePackages = {"com.phg.looksay.dao", "com.phg.looksay.service", "com.phg.looksay.controller"})
+@SpringBootApplication
 public class LooksayApplication {
 
 	public static void main(String[] args) {
