@@ -32,4 +32,8 @@ public class LooksayController {
             }
     }
 
+    @RequestMapping(value="/message", method= RequestMethod.GET)
+    public String getMessage() {
+        return looksayService.getMessage();
+    }
 }

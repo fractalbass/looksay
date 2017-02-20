@@ -37,4 +37,9 @@ public class LooksayService {
         output=output+currentCount+","+currentVal;
         return output;
     }
+
+    public String getMessage() {
+        return "|Miles Sure Is Cool|";
+
+    }
 }
