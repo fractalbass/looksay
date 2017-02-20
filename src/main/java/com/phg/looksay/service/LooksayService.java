@@ -39,7 +39,7 @@ public class LooksayService {
     }
 
     public String getMessage() {
-        return "|Miles Sure Is Cool|";
+        return "|Miles Sure Is Cool.|";
 
     }
 }
