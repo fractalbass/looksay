@@ -15,7 +15,7 @@ import java.util.ArrayList;
 /**
  * Created by milesporter on 5/13/16.
  */
-@Controller
+@RestController
 public class LooksayController {
 
     @Autowired
